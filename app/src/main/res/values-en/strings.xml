@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Convertiseur</string>
+    <string-array name="liste_devises">
+        <item></item>
+        <item>Livre</item>
+        <item>Francs CFA</item>
+        <item>Dirham</item>
+        <item>Dollars US</item>
+        <item>Euro</item>
+        <item>Yen</item>
+    </string-array>
+    <string name="Convertir">"Convert"</string>
+    <string name="Quitter">"Quit"</string>
+    <string name="devisedep">"Starting money"</string>
+    <string name="devisear">"Arriving money"</string>
+    <string name="montant">"Convert money"</string>
+</resources>
