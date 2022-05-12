@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.convertiseur.metier.Convert;
 
+import java.text.DecimalFormat;
+
 public class resultat extends AppCompatActivity {
 
     @Override
@@ -29,7 +31,9 @@ public class resultat extends AppCompatActivity {
 
     public String retoursomme(String devisedep, String devisear, Double montant){
         Double convertion = Convert.convertir(devisedep, devisear, montant);
-        String msg= "Le montant de "+ montant +" au départ en "+ devisedep +" vaut en "+devisear+" "+convertion;
+        DecimalFormat df = new DecimalFormat("0.00");
+        String strmontant = df.format(convertion);
+        String msg= "Le montant de "+ montant +" au départ en "+ devisedep +" vaut en "+devisear+" "+strmontant;
         return msg;
     }
 
