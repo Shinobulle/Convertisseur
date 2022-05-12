@@ -1,17 +1,24 @@
 <resources>
-    <string name="app_name">Convertiseur</string>
-    <string-array name="liste_devises">
-        <item></item>
-        <item>Livre</item>
-        <item>Francs CFA</item>
-        <item>Dirham</item>
-        <item>Dollars US</item>
-        <item>Euro</item>
-        <item>Yen</item>
-    </string-array>
+    <string name="app_name">Convertissor</string>
     <string name="Convertir">"Convertor"</string>
     <string name="Quitter">"Quitor"</string>
     <string name="devisedep">"Los pepes "</string>
     <string name="devisear">"Las pepes"</string>
     <string name="montant">"Convertor pepes"</string>
+    <style name="afpa">
+        <item name="android:background">@drawable/fond_afpa</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:textColor">#0023A0</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <style name="afpa_land">
+        <item name="android:background">@drawable/fond_afpa_land</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:textColor">#0023A0</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 </resources>

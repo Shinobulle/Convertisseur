@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Convertiseur</string>
+    <string name="app_name">Convertisseur</string>
     <string name="Convertir">"Convertir"</string>
     <string name="Quitter">"Quitter"</string>
     <string name="devisedep">"Devise de départ"</string>
