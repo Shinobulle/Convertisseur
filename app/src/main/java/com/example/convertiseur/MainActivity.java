@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.convertiseur.metier.Convert;
@@ -59,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             Double chiffre = Double.parseDouble(convert);
-             Intent resultat = new Intent(this, resultat.class);
-             resultat.putExtra("devisedep", deviseDep);
-             resultat.putExtra("devisear",deviseAr);
-             resultat.putExtra("montant",chiffre);
-             startActivity(resultat);
+            Intent resultat = new Intent(this, resultat.class);
+            resultat.putExtra("devisedep", deviseDep);
+            resultat.putExtra("devisear",deviseAr);
+            resultat.putExtra("montant",chiffre);
+            startActivityForResult(resultat, 1);
 
         }
     }
@@ -90,5 +91,13 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_checked, liste_de_string);
         spinner.setAdapter(adapter);
         return spinner;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        TextView res = (TextView) findViewById(R.id.textView4);
+//        Toast.makeText(getBaseContext(),data.getStringExtra("repResult"),Toast.LENGTH_SHORT).show();
+        res.setText(data.getStringExtra("repResult"));
     }
 }
