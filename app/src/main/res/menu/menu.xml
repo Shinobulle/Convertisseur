@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/convertir"
+        android:title="@string/Convertir"/>
+    <item android:id="@+id/parametre"
+        android:title="@string/parametre"
+        >
+        <menu android:id="@+id/sousmenu">
+            <item android:id="@+id/langue"
+                android:title="@string/langue" />
+            <item android:id="@+id/date"
+                android:title="@string/date" />
+            <item android:id="@+id/affichage"
+                android:title="@string/affichage"/>
+        </menu>
+    </item>
+    <item android:id="@+id/quitter"
+        android:title="Quitter"
+         />
+</menu>

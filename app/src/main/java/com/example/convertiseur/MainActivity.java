@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -99,5 +103,35 @@ public class MainActivity extends AppCompatActivity {
         TextView res = (TextView) findViewById(R.id.textView4);
 //        Toast.makeText(getBaseContext(),data.getStringExtra("repResult"),Toast.LENGTH_SHORT).show();
         res.setText(data.getStringExtra("repResult"));
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+    // Instanciation du menu XML spécifier en un objet Menu
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // On teste l’Id de l’item cliqué et on déclenche une action
+        switch (item.getItemId()) {
+            case R.id.convertir:
+                View vItem = (View) item.getActionView();
+                convertir_Somme(vItem);
+                return true;
+            case R.id.langue:
+                Intent changerLangue = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                startActivity(changerLangue);
+                return true;
+            case R.id.date:
+                Intent changerDate = new Intent(Settings.ACTION_DATE_SETTINGS);
+                startActivity(changerDate);
+                return true;
+            case R.id.affichage:
+                Intent changerAffichage = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
+                startActivity(changerAffichage);
+                return true;
+        }
+        return false;
     }
 }

@@ -5,6 +5,10 @@
     <string name="devisedep">"Starting money"</string>
     <string name="devisear">"Arriving money"</string>
     <string name="montant">"Convert money"</string>
+    <string name="parametre">Settings</string>
+    <string name="date">Change date</string>
+    <string name="langue">Change languages</string>
+    <string name="affichage">Change display</string>
     <style name="afpa">
         <item name="android:background">@drawable/fond_afpa</item>
         <item name="android:gravity">center_horizontal</item>

@@ -5,6 +5,10 @@
     <string name="devisedep">"Los pepes "</string>
     <string name="devisear">"Las pepes"</string>
     <string name="montant">"Convertor pepes"</string>
+    <string name="parametre">configuraciones</string>
+    <string name="date">Cambiar fecha</string>
+    <string name="langue">Cambiar el idioma</string>
+    <string name="affichage">Cambio Vista</string>
     <style name="afpa">
         <item name="android:background">@drawable/fond_afpa</item>
         <item name="android:gravity">center_horizontal</item>

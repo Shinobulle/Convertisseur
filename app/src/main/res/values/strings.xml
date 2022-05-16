@@ -5,6 +5,10 @@
     <string name="devisedep">"Devise de départ"</string>
     <string name="devisear">"Devise d'arrivee"</string>
     <string name="montant">"Montant à convertir"</string>
+    <string name="parametre">Paramètres</string>
+    <string name="date">Changer la date</string>
+    <string name="langue">Changer la langue</string>
+    <string name="affichage">Changer l\'affichage</string>
     <style name="afpa">
         <item name="android:background">@drawable/fond_afpa</item>
         <item name="android:gravity">center_horizontal</item>
