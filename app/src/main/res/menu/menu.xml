@@ -1,10 +1,16 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/convertir"
-        android:title="@string/Convertir"/>
+        android:title="@string/Convertir"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_convertisseur"/>
     <item android:id="@+id/parametre"
         android:title="@string/parametre"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/configuration"
         >
-        <menu android:id="@+id/sousmenu">
+        <menu android:id="@+id/sousmenu"
+            >
             <item android:id="@+id/langue"
                 android:title="@string/langue" />
             <item android:id="@+id/date"
@@ -15,5 +21,6 @@
     </item>
     <item android:id="@+id/quitter"
         android:title="Quitter"
-         />
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/quitter"/>
 </menu>

@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,11 +27,19 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences prefs = getSharedPreferences("file_preferences", MODE_PRIVATE);
+    SharedPreferences activityPrefs = getPreferences(MODE_PRIVATE);
+    SharedPreferences.Editor editor = activityPrefs.edit();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        registerForContextMenu((ImageView)findViewById(R.id.imageConfig));
+        String posdep =  prefs.getString("devisedep", "Erreur");
+        String posar =  prefs.getString("devisear", "Erreur");
+        String ancienmontant =  prefs.getString("montant", "Erreur");
+        if (posdep)
         chargerSpinner(R.id.spinner);
         chargerSpinner(R.id.spinner2);
 
@@ -75,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void quitter(View v){
         Log.d("MainActivity", "quitter");
+        String convert = ((EditText) findViewById(R.id.editTextNumber)).getText().toString() ;
+        String deviseDep = ((Spinner) findViewById(R.id.spinner)).getSelectedItem().toString();
+        String deviseAr = ((Spinner) findViewById(R.id.spinner2)).getSelectedItem().toString();
         Toast.makeText(getBaseContext(), "Je te quitte !",
                 Toast.LENGTH_LONG).show();
         finishAffinity();
@@ -131,7 +145,38 @@ public class MainActivity extends AppCompatActivity {
                 Intent changerAffichage = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
                 startActivity(changerAffichage);
                 return true;
+            case R.id.quitter :
+                View vItemQuitter = (View) item.getActionView();
+                quitter(vItemQuitter);
+                return true;
         }
         return false;
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        // XML décrivant les options du menu contextuel
+        inflater.inflate(R.menu.menu_image, menu);
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        // On récupère l'id de l'item et on le compare
+        switch (item.getItemId()) {
+            case R.id.imageLangue:
+                Intent changerLangue = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                startActivity(changerLangue);
+                return true;
+            case R.id.imageDate:
+                Intent changerDate = new Intent(Settings.ACTION_DATE_SETTINGS);
+                startActivity(changerDate);
+                return true;
+            case R.id.imageAffiche:
+                Intent changerAffichage = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
+                startActivity(changerAffichage);
+                return true;
+        }
+        return super.onContextItemSelected(item);
     }
 }

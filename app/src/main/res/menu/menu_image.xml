@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/imageLangue" android:title="@string/langue"/>
+    <item android:id="@+id/imageDate" android:title="@string/date"/>
+    <item android:id="@+id/imageAffiche" android:title="@string/affichage"/>
+</menu>
