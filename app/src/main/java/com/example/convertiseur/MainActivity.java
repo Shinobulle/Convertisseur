@@ -27,22 +27,32 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
-    SharedPreferences prefs = getSharedPreferences("file_preferences", MODE_PRIVATE);
-    SharedPreferences activityPrefs = getPreferences(MODE_PRIVATE);
-    SharedPreferences.Editor editor = activityPrefs.edit();
+
+
+    private SharedPreferences activityPrefs;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         registerForContextMenu((ImageView)findViewById(R.id.imageConfig));
-        String posdep =  prefs.getString("devisedep", "Erreur");
-        String posar =  prefs.getString("devisear", "Erreur");
-        String ancienmontant =  prefs.getString("montant", "Erreur");
-        if (posdep)
-        chargerSpinner(R.id.spinner);
-        chargerSpinner(R.id.spinner2);
-
+        this.activityPrefs = getPreferences(MODE_PRIVATE);
+        String posdep =  activityPrefs.getString("devisedep", "Erreur");
+        String posar =  activityPrefs.getString("devisear", "Erreur");
+//        Log.i("SAUCISSE", "chargerSpinner: " + posdep +" sp 2: "+ posar);
+        if (posdep.equals("Erreur") || posar.equals("Erreur")){
+            Toast.makeText(getBaseContext(), "C'est vide",
+                    Toast.LENGTH_LONG).show();
+            chargerSpinner(R.id.spinner, "");
+            chargerSpinner(R.id.spinner2, "");
+        }
+        else {
+            Toast.makeText(getBaseContext(), "C'est rempli",
+                    Toast.LENGTH_LONG).show();
+            chargerSpinner(R.id.spinner, posdep);
+            chargerSpinner(R.id.spinner2, posar);
+        }
 
     }
 
@@ -74,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
         else{
+            String spinnerDep = ((Spinner) findViewById(R.id.spinner)).getSelectedItem().toString();
+            String spinnerAr = ((Spinner) findViewById(R.id.spinner2)).getSelectedItem().toString();
+            this.editor = activityPrefs.edit();
+            editor.putString("devisedep", spinnerDep);
+            editor.putString("devisear", spinnerAr);
+            this.editor.commit();
             Double chiffre = Double.parseDouble(convert);
             Intent resultat = new Intent(this, resultat.class);
             resultat.putExtra("devisedep", deviseDep);
@@ -86,9 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void quitter(View v){
         Log.d("MainActivity", "quitter");
-        String convert = ((EditText) findViewById(R.id.editTextNumber)).getText().toString() ;
-        String deviseDep = ((Spinner) findViewById(R.id.spinner)).getSelectedItem().toString();
-        String deviseAr = ((Spinner) findViewById(R.id.spinner2)).getSelectedItem().toString();
         Toast.makeText(getBaseContext(), "Je te quitte !",
                 Toast.LENGTH_LONG).show();
         finishAffinity();
@@ -102,13 +115,18 @@ public class MainActivity extends AppCompatActivity {
         return liste_de_string;
     }
 
-    public Spinner chargerSpinner(int idView){
+    public Spinner chargerSpinner(int idView, String value){
         final Spinner spinner = (Spinner) findViewById(idView);
         final ArrayList <String> liste_de_string = chargeDevises();
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_checked, liste_de_string);
         spinner.setAdapter(adapter);
+        int pos = adapter.getPosition(value);
+        spinner.setSelection(pos);
+
         return spinner;
+
+
     }
 
     @Override
