@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -21,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.convertiseur.metier.Convert;
+import com.example.convertiseur.modele.ConnexionSQLite;
+import com.example.convertiseur.outils.Outils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,25 +34,29 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences activityPrefs;
     private SharedPreferences.Editor editor;
+    private SQLiteDatabase devises;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         registerForContextMenu((ImageView)findViewById(R.id.imageConfig));
+        ConnexionSQLite test = new ConnexionSQLite(this, "Devises", null, 1);
+        test.getWritableDatabase();
+        Outils.toastShort(getBaseContext(), "C'est bon, la bdd ne crashe pas l'app");
         this.activityPrefs = getPreferences(MODE_PRIVATE);
         String posdep =  activityPrefs.getString("devisedep", "Erreur");
         String posar =  activityPrefs.getString("devisear", "Erreur");
 //        Log.i("SAUCISSE", "chargerSpinner: " + posdep +" sp 2: "+ posar);
         if (posdep.equals("Erreur") || posar.equals("Erreur")){
-            Toast.makeText(getBaseContext(), "C'est vide",
-                    Toast.LENGTH_LONG).show();
+//            Toast.makeText(getBaseContext(), "C'est vide",
+//                    Toast.LENGTH_LONG).show();
             chargerSpinner(R.id.spinner, "");
             chargerSpinner(R.id.spinner2, "");
         }
         else {
-            Toast.makeText(getBaseContext(), "C'est rempli",
-                    Toast.LENGTH_LONG).show();
+//            Toast.makeText(getBaseContext(), "C'est rempli",
+//                    Toast.LENGTH_LONG).show();
             chargerSpinner(R.id.spinner, posdep);
             chargerSpinner(R.id.spinner2, posar);
         }
